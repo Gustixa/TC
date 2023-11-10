@@ -2,6 +2,11 @@
 
 import Data.List
 
+
+[("product","Laptop"), ("price","1000"), ("color","Silver")],
+  [("product","Smartphone"), ("price","800"), ("color","Black")],
+  [("product","Tablet"), ("price","500"), ("color","Gold")]
+  
 -- Lista original de diccionarios
 d :: [[(String, String)]]
 d = [[("make","Nokia"), ("model","216"), ("color","Black")],

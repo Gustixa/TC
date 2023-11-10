@@ -1,8 +1,8 @@
 # Matriz X
-X = [
-    [1, 2, 3, 1],
-    [4, 5, 6, 0],
-    [7, 8, 9, -1]
+X = [ 
+    [1],
+    [2],
+    [3]
 ]
 
 # Calcular la matriz transpuesta XT usando lambda
