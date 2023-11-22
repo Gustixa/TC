@@ -35,3 +35,12 @@ class TuringMachine:
         self.delta = self.config['delta']
         self.current_state = self.initial_state
         self.tape = None
+
+    def load_input(self, input_string):
+        self.tape = Tape(input_string, self.blank_symbol)
+        self.current_state = self.initial_state
+
+    def step(self):
+        current_symbol = self.tape.read_symbol()
+        for rule in self.delta:
+            if rule['params']['initial_state'] == self.current_state and rule['params']['tape_input']
