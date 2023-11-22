@@ -52,3 +52,11 @@ class TuringMachine:
                 return self.current_state, current_symbol, new_state, new_symbol, displacement
         raise Exception("No valid transition found.")
 
+
+
+tm = TuringMachine('archivo.yaml')
+tm.load_input('aabb')
+result, tape_output, process_steps = tm.run()
+print(f"String accepted: {result}\nResult of the Turing machine calculation: {tape_output}")
+for step in process_steps:
+    print(step)
