@@ -51,6 +51,14 @@ class TuringMachine:
                 self.tape.move_head(displacement)
                 return self.current_state, current_symbol, new_state, new_symbol, displacement
         raise Exception("No valid transition found.")
+    def run(self):
+        snapshots = []
+        while self.current_state not in self.final_states:
+            state_before, symbol_read, new_state, symbol_written, movement = self.step()
+            snapshots.append(f"{state_before}{symbol_read} ├─ {symbol_written}{new_state}")
+            self.current_state = new_state
+        return self.current_state in self.accept_state, ''.join(self.tape.tape), snapshots
+
 
 
 
