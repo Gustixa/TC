@@ -64,7 +64,7 @@ class TuringMachine:
                 self.tape.move_head(displacement)
                 return self.current_state, current_symbol, new_state, new_symbol, displacement
         # Usa una excepción personalizada para manejar transiciones no válidas
-        raise InvalidTransitionError("No valid transition found.")
+        raise Exception("No valid transition found.")
 
     def get_full_tape_state(self):
         # Obtiene el estado completo de la cinta (estado actual + contenido de la cinta)
