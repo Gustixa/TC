@@ -43,4 +43,12 @@ class TuringMachine:
     def step(self):
         current_symbol = self.tape.read_symbol()
         for rule in self.delta:
-            if rule['params']['initial_state'] == self.current_state and rule['params']['tape_input']
+            if rule['params']['initial_state'] == self.current_state and rule['params']['tape_input'] == current_symbol:
+                new_state = rule['output']['final_state']
+                new_symbol = rule['output']['tape_output']
+                displacement = rule['output']['tape_displacement']
+                self.tape.write_symbol(new_symbol)
+                self.tape.move_head(displacement)
+                return self.current_state, current_symbol, new_state, new_symbol, displacement
+        raise Exception("No valid transition found.")
+
