@@ -5,6 +5,7 @@ class Tape:
         self.tape = list(input_string)
         self.head_position = 0
         self.blank_symbol = blank_symbol
+
     def move_head(self, direction):
         if direction == 'R':
             self.head_position += 1
@@ -21,6 +22,7 @@ class Tape:
 
     def read_symbol(self):
         return self.tape[self.head_position]
+
 class TuringMachine:
     def __init__(self, config_file):
         with open(config_file, 'r') as file:
@@ -51,20 +53,47 @@ class TuringMachine:
                 self.tape.move_head(displacement)
                 return self.current_state, current_symbol, new_state, new_symbol, displacement
         raise Exception("No valid transition found.")
+
+    def get_full_tape_state(self):
+        return f"{self.current_state}{self.get_tape_string()}"
+
+    def get_tape_string(self):
+        return ''.join(self.tape.tape)
+
+    
+    def get_full_tape_state(self):
+        # Esta función se ajusta para mostrar el estado actual y la cinta sin corchetes
+        return f"{self.current_state}{''.join(self.tape.tape)}"
+
     def run(self):
         snapshots = []
+        # Agregar el estado inicial y la cinta antes de cualquier transición
+        snapshots.append(self.get_full_tape_state())
         while self.current_state not in self.final_states:
             state_before, symbol_read, new_state, symbol_written, movement = self.step()
-            snapshots.append(f"{state_before}{symbol_read} ├─ {symbol_written}{new_state}")
+            # Agregar el estado y la cinta después de cada transición
+            snapshots.append(f"{state_before}{''.join(self.tape.tape)} - {new_state}{''.join(self.tape.tape)}")
             self.current_state = new_state
-        return self.current_state in self.accept_state, ''.join(self.tape.tape), snapshots
+        # Determinar si la cadena es aceptada y remover los caracteres de cinta en blanco
+        is_accepted = self.current_state in self.accept_state
+        final_tape_output = ''.join(self.tape.tape).rstrip(self.blank_symbol)
+        return is_accepted, final_tape_output, snapshots
 
 
-
-
-tm = TuringMachine('archivo.yaml')
-tm.load_input('aabb')
+input_string = 'aaabbaa'
+tm = TuringMachine('alteradora.yaml')
+tm.load_input(input_string)
 result, tape_output, process_steps = tm.run()
-print(f"String accepted: {result}\nResult of the Turing machine calculation: {tape_output}")
+print("Cinta de entrada:\n" + input_string)
+print("\nPasos de la Máquina de Turing:")
 for step in process_steps:
     print(step)
+print("\n")
+print("Resultado de la Máquina de Turing:\n" + tape_output)
+print("\nCadena aceptada: " + ("Sí" if result else "No"))
+
+#cadenas  a probar
+#abbbb
+#abbabb
+#baaaa
+#aaabbaa
