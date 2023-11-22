@@ -21,3 +21,17 @@ class Tape:
 
     def read_symbol(self):
         return self.tape[self.head_position]
+class TuringMachine:
+    def __init__(self, config_file):
+        with open(config_file, 'r') as file:
+            self.config = yaml.safe_load(file)
+        self.states = self.config['q_states']['q_list']
+        self.initial_state = self.config['q_states']['initial']
+        self.final_states = self.config['q_states']['final']
+        self.accept_state = self.config['q_states']['accept']
+        self.alphabet = self.config['alphabet']
+        self.tape_alphabet = self.config['tape_alphabet']
+        self.blank_symbol = self.config['blank']
+        self.delta = self.config['delta']
+        self.current_state = self.initial_state
+        self.tape = None
