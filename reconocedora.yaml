@@ -1,0 +1,94 @@
+q_states:
+  q_list:
+    - "q0"
+    - "q1"
+    - "q2"
+    - "qacc"
+    - "qrej"
+  initial: 'q0'
+  final:
+    - 'qacc'
+    - 'qrej'
+  accept:
+    - 'qacc'
+alphabet:
+  - '0'
+  - '1'
+  - 'X'
+  - 'B'
+tape_alphabet:
+  - '0'
+  - '1'
+  - 'X'
+  - 'B'
+blank: 'B'
+delta:
+  - params:
+      initial_state: 'q0'
+      tape_input: '0'
+    output:
+      final_state: 'q0'
+      tape_output: '0'
+      tape_displacement: 'R'
+
+  - params:
+      initial_state: 'q0'
+      tape_input: '1'
+    output:
+      final_state: 'q1'
+      tape_output: '1'
+      tape_displacement: 'R'
+
+  - params:
+      initial_state: 'q0'
+      tape_input: 'X'
+    output:
+      final_state: 'q0'
+      tape_output: 'X'
+      tape_displacement: 'R'
+
+  - params:
+      initial_state: 'q0'
+      tape_input: 'B'
+    output:
+      final_state: 'qacc'
+      tape_output: 'B'
+      tape_displacement: 'S'  # Movimiento de parada
+
+  - params:
+      initial_state: 'q1'
+      tape_input: '0'
+    output:
+      final_state: 'q1'
+      tape_output: '0'
+      tape_displacement: 'R'
+
+  - params:
+      initial_state: 'q1'
+      tape_input: '1'
+    output:
+      final_state: 'q0'
+      tape_output: '1'
+      tape_displacement: 'R'
+
+  - params:
+      initial_state: 'q1'
+      tape_input: 'X'
+    output:
+      final_state: 'q1'
+      tape_output: 'X'
+      tape_displacement: 'R'
+
+  - params:
+      initial_state: 'q1'
+      tape_input: 'B'
+    output:
+      final_state: 'qrej'
+      tape_output: 'B'
+      tape_displacement: 'S'  # Movimiento de parada
+
+simulation_strings:
+  - '101011'  # Cadena con un número par de unos (aceptada)
+  - '1001'    # Cadena con un número impar de unos (rechazada)
+  - '0'       # Cadena con cero unos (aceptada)
+  - '110011'  # Cadena con un número par de unos (aceptada)
