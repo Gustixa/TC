@@ -86,8 +86,9 @@ class TuringMachine:
         return is_accepted, final_tape_output, snapshots
 
 # Ejemplo de uso del código
-input_string = 'aaabbaa'
-tm = TuringMachine('alteradora.yaml')
+#aaabbaa
+input_string = '10001001'
+tm = TuringMachine('reconocedora.yaml')
 tm.load_input(input_string)
 result, tape_output, process_steps = tm.run()
 print("Cinta de entrada:\n" + input_string)
@@ -98,6 +99,12 @@ print("\n")
 print("Resultado de la Máquina de Turing:\n" + tape_output)
 print("\nCadena aceptada: " + ("Sí" if result else "No"))
 
+
+
+#Pruebas
+# 101110011111
+# 000100
+# 1011100111111
 
 #cadenas  a probar
 #abbbb

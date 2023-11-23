@@ -89,6 +89,6 @@ delta:
 
 simulation_strings:
   - '101011'  # Cadena con un número par de unos (aceptada)
-  - '1001'    # Cadena con un número impar de unos (rechazada)
+  - '10011'    # Cadena con un número impar de unos (rechazada)
   - '0'       # Cadena con cero unos (aceptada)
   - '110011'  # Cadena con un número par de unos (aceptada)
